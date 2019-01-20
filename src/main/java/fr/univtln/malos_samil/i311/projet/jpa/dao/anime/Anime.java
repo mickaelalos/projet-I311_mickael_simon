@@ -1,19 +1,43 @@
-package fr.univtln.malos_samil.i311.projet.jpa.anime;
+package fr.univtln.malos_samil.i311.projet.jpa.dao.anime;
 
+import fr.univtln.malos_samil.i311.projet.jpa.dao.StringQueries;
+
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@NamedQueries({
+        @NamedQuery(name = StringQueries.GET_ANIME_BY_ID,
+                query = "SELECT anime FROM Anime anime WHERE anime.id = :Pid"),
+
+        @NamedQuery(name = StringQueries.GET_ANIME_ALL,
+                query = "SELECT anime FROM Anime anime")})
 public class Anime {
     public enum Season {Winter,Summer,Spring,Fall}
     public enum Status {Currently,Finished}
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="ANIME_ID")
     private int id;
+    @Id
+    @Column(name="TITLE")
     private String title;
+    @Column(name="YEAR")
     private int year;
+    @Column(name="SYNOPSIS")
     private String synopsis;
+    @Column(name="ICON")
     private String icon;
+    @Column(name="STUDIO")
     private String studio;
+    @Column(name="EPISODE")
     private int episode;
+    @Column(name="SEASON")
+    @Enumerated(EnumType.ORDINAL)
     private Season season;
+    @Column(name="STATUS")
+    @Enumerated(EnumType.ORDINAL)
     private Status status;
 
     public Anime() {

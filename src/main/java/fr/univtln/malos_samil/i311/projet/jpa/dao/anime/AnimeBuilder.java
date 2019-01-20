@@ -1,4 +1,4 @@
-package fr.univtln.malos_samil.i311.projet.jpa.anime;
+package fr.univtln.malos_samil.i311.projet.jpa.dao.anime;
 
 public class AnimeBuilder {
     private int id;

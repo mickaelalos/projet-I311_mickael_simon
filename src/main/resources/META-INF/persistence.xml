@@ -6,7 +6,7 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <jta-data-source>jdbc/postgres-pool</jta-data-source>
 
-        <class>fr.univtln.malos_samil.i311.projet.jpa.anime.Anime</class>
+        <class>fr.univtln.malos_samil.i311.projet.jpa.dao.anime.Anime</class>
 
         <properties>
             <!-- Les paramètres de connexions -->
@@ -21,16 +21,16 @@
     <persistence-unit name="persistenceAnimeLocal" transaction-type="RESOURCE_LOCAL">
 
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <class>fr.univtln.malos_samil.i311.projet.jpa.anime.Anime</class>
+        <class>fr.univtln.malos_samil.i311.projet.jpa.dao.anime.Anime</class>
 
         <properties>
-
             <property name="javax.persistence.target-database" value="PostgreSQL"/>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/dba"/>
-            <property name="javax.persistence.jdbc.user" value="Uani"/>
-            <property name="javax.persistence.jdbc.password" value="testServer"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
+            <property name="javax.persistence.jdbc.user" value="postgres"/>
+            <property name="javax.persistence.jdbc.password" value="password"/>
             <property name="eclipselink.ddl-generation.output-mode" value="both"/>
+            <!--<property name="eclipselink.ddl-generation" value="create-tables"/>-->
             <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
         </properties>
     </persistence-unit>
