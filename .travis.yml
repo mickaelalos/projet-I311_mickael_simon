@@ -42,7 +42,7 @@ branches:
   except:
   - gh-pages
   - master
-  - "/^feature-.*$/"
+  - /^feature-.*$/
 env:
   global:
   - secure: xjpIuyhxJK1Kr53L4hus6AEJIBO6aQLzzTj9iH+Na6mGZNXIXwTEDKcYe8hZKyOBVr4LtLH1wUbhrwBg6H5pQZyzsTMAGJV8Ms/adEyEk6njSHniwTDJkbEXuFLIzAbQ8q0WGqjZYSJIbGazUgViNdaKf7SpbBrdk5aRijnqQFadZ5vtS+X4UyuUl4e5lbEH1HLTJDd6eubdoWbqV3DWiBe5SrvnUYJbAC49hx243HsPYsmy9XTUhkL9SdDhFA9wt39Ct451nIuv8d+Z4KNNpNTYtI2b38PdZJ4n7BsOQ1QjsHDoNKgTGs5hE1Bjcbeivh1z2j/Rl6DUEMWxUKfrbs35auECJI0au0svDOGqkDTVq4bmiGRTMz3csofkZ7u1WsQASEfG3RXv8Ip7lZSz+l+xcERmK80L0TNc4zL99hsj0tCx1kmj9Xy1n4LGFaMAY73HXBeEyymiNMXHeHAeRwAS3UNIjROEF8kRE14kBgAsONm3sRRQ1OAdzKPRAWri2E0Q3WoD6JdPTPSDWiTO/VoigT+rPv5Dxzus1pKtP02HAyl694bq/LOLogONJz78h1tv3/Hs/htM0wLhVzc8ZH3Ow62regDUlo3rpNP71xOOobj3pAutE1RKMnyFa+MPh+baN3tgbfcFKzqleRh+BiQo6L+aHhULeLNj/5i5W6Q=
