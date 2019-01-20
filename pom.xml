@@ -23,6 +23,14 @@
             <name>bintray</name>
             <url>https://dl.bintray.com/dptinfoutln/public</url>
         </repository>
+        <repository>
+		    <snapshots>
+		        <enabled>false</enabled>
+		    </snapshots>
+		    <id>bintray-mickaelalos-master</id>
+		    <name>bintray</name>
+		    <url>https://dl.bintray.com/mickaelalos/master</url>
+		</repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
@@ -32,6 +40,14 @@
             <id>bintray-dptinfoutln-public</id>
             <name>bintray-plugins</name>
             <url>https://dl.bintray.com/dptinfoutln/public</url>
+        </pluginRepository>
+        <pluginRepository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-mickaelalos-master</id>
+            <name>bintray-plugins</name>
+            <url>https://dl.bintray.com/mickaelalos/master</url>
         </pluginRepository>
     </pluginRepositories>
 
@@ -125,4 +141,11 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <distributionManagement> 
+        <repository> 
+            <id>bintray-mickaelalos-master</id> 
+            <name>mickaelalos-master</name> 
+            <url>https://api.bintray.com/maven/mickaelalos/master/projet-I311_mickael_simon/;publish=1</url> 
+        </repository> 
+    </distributionManagement>
 </project>
