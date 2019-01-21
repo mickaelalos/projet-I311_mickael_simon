@@ -37,6 +37,11 @@
 		    <name>bintray</name>
 		    <url>https://dl.bintray.com/mickaelalos/master</url>
 		</repository>
+        <repository>
+            <id>prime-repo</id>
+            <name>PrimeFaces Maven Repository</name>
+            <url>http://repository.primefaces.org</url>
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
@@ -71,8 +76,8 @@
     <!-- ADAPTER les coordonnées -->
     <groupId>fr.univtln.malos_samil.i311.projet</groupId>
     <artifactId>projet-i311</artifactId>
-    <version>0.0.2</version>
-    <packaging>jar</packaging>
+    <version>0.0.4</version>
+    <packaging>war</packaging>
     <!-- ADAPTER les coordonnées -->
 
     <!-- ADAPTER les métadonnées -->
@@ -223,6 +228,11 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>9.4.1212</version>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>${primefaces.version}</version>
         </dependency>
     </dependencies>
     <distributionManagement> 
