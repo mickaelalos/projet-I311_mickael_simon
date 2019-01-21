@@ -1,7 +1,6 @@
-package fr.univtln.malos_samil.i311.projet.jpa.dao.anime;
+package fr.univtln.malos_samil.i311.projet.jpa.anime;
 
 public class AnimeBuilder {
-    private int id;
     private String title;
     private int year;
     private String synopsis;
@@ -10,11 +9,6 @@ public class AnimeBuilder {
     private int episode;
     private Anime.Season season;
     private Anime.Status status;
-
-    public AnimeBuilder setId(int id) {
-        this.id = id;
-        return this;
-    }
 
     public AnimeBuilder setTitle(String title) {
         this.title = title;
@@ -57,6 +51,6 @@ public class AnimeBuilder {
     }
 
     public Anime createAnime() {
-        return new Anime(id, title, year, synopsis, icon, studio, episode, season, status);
+        return new Anime(title, year, synopsis, icon, studio, episode, season, status);
     }
 }

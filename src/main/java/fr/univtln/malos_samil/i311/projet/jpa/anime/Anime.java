@@ -1,6 +1,6 @@
-package fr.univtln.malos_samil.i311.projet.jpa.dao.anime;
+package fr.univtln.malos_samil.i311.projet.jpa.anime;
 
-import fr.univtln.malos_samil.i311.projet.jpa.dao.StringQueries;
+import fr.univtln.malos_samil.i311.projet.jpa.utils.StringQueries;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -13,9 +13,6 @@ import java.util.Objects;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
-        @NamedQuery(name = StringQueries.GET_ANIME_BY_ID,
-                query = "SELECT anime FROM Anime anime WHERE anime.id = :Pid"),
-
         @NamedQuery(name = StringQueries.GET_ANIME_ALL,
                 query = "SELECT anime FROM Anime anime")})
 public class Anime {
@@ -68,8 +65,8 @@ public class Anime {
         this.status = Status.None;
     }
 
-    public Anime(int id, String title, int year, String synopsis, String icon, String studio, int episode, Season season, Status status) {
-        this.id = id;
+    public Anime(String title, int year, String synopsis, String icon, String studio, int episode, Season season, Status status) {
+        this.id = 0;
         this.title = title;
         this.year = year;
         this.synopsis = synopsis;
