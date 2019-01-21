@@ -3,9 +3,15 @@ package fr.univtln.malos_samil.i311.projet.jpa.dao.anime;
 import fr.univtln.malos_samil.i311.projet.jpa.dao.StringQueries;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
 
 @Entity
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
         @NamedQuery(name = StringQueries.GET_ANIME_BY_ID,
                 query = "SELECT anime FROM Anime anime WHERE anime.id = :Pid"),
@@ -13,34 +19,53 @@ import java.util.Objects;
         @NamedQuery(name = StringQueries.GET_ANIME_ALL,
                 query = "SELECT anime FROM Anime anime")})
 public class Anime {
-    public enum Season {Winter,Summer,Spring,Fall}
-    public enum Status {Currently,Finished}
+    public enum Season {None,Winter,Summer,Spring,Fall}
+    public enum Status {None,Currently,Finished}
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="ANIME_ID")
     private int id;
     @Id
+    @XmlElement
     @Column(name="TITLE")
     private String title;
+    @XmlElement
     @Column(name="YEAR")
     private int year;
+    @XmlElement
     @Column(name="SYNOPSIS")
     private String synopsis;
+    @XmlElement
     @Column(name="ICON")
     private String icon;
+    @XmlElement
     @Column(name="STUDIO")
     private String studio;
+    @XmlElement
     @Column(name="EPISODE")
     private int episode;
+    @XmlElement
     @Column(name="SEASON")
     @Enumerated(EnumType.ORDINAL)
     private Season season;
+    @XmlElement
     @Column(name="STATUS")
     @Enumerated(EnumType.ORDINAL)
     private Status status;
 
     public Anime() {
+    }
+
+    public Anime(String title, int episode) {
+        this.title = title;
+        this.year = 2019;
+        this.synopsis = "n/a";
+        this.icon = "n/a";
+        this.studio = "n/a";
+        this.episode = episode;
+        this.season = Season.None;
+        this.status = Status.None;
     }
 
     public Anime(int id, String title, int year, String synopsis, String icon, String studio, int episode, Season season, Status status) {
@@ -57,6 +82,10 @@ public class Anime {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
