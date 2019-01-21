@@ -3,7 +3,6 @@ package fr.univtln.malos_samil.i311.projet;
 import fr.univtln.malos_samil.i311.projet.jpa.dao.StringQueries;
 import fr.univtln.malos_samil.i311.projet.jpa.dao.anime.Anime;
 import fr.univtln.malos_samil.i311.projet.jpa.dao.anime.AnimeBuilder;
-import fr.univtln.malos_samil.i311.projet.jpa.dao.anime.AnimeCrud;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

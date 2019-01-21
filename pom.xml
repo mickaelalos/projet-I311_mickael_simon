@@ -71,7 +71,7 @@
     <!-- ADAPTER les coordonnées -->
     <groupId>fr.univtln.malos_samil.i311.projet</groupId>
     <artifactId>projet-i311</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <packaging>jar</packaging>
     <!-- ADAPTER les coordonnées -->
 
