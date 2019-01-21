@@ -17,6 +17,7 @@
         <embedded-glassfish.version>3.1.2.2</embedded-glassfish.version>
         <glassfish.version>4.1</glassfish.version>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <jersey-version>1.19</jersey-version>
     </properties>
     <!-- ADAPTER LES PROPRIETES SUIVANTES -->
 
@@ -37,6 +38,11 @@
 		    <name>bintray</name>
 		    <url>https://dl.bintray.com/mickaelalos/master</url>
 		</repository>
+        <repository>
+            <id>prime-repo</id>
+            <name>PrimeFaces Maven Repository</name>
+            <url>http://repository.primefaces.org</url>
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
@@ -71,8 +77,8 @@
     <!-- ADAPTER les coordonnées -->
     <groupId>fr.univtln.malos_samil.i311.projet</groupId>
     <artifactId>projet-i311</artifactId>
-    <version>0.0.2</version>
-    <packaging>jar</packaging>
+    <version>0.0.5</version>
+    <packaging>war</packaging>
     <!-- ADAPTER les coordonnées -->
 
     <!-- ADAPTER les métadonnées -->
@@ -152,30 +158,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <plugin>
-                <groupId>org.glassfish.embedded</groupId>
-                <artifactId>maven-embedded-glassfish-plugin</artifactId>
-                <version>${embedded-glassfish.version}</version>
-                <configuration>
-                    <app>${project.build.directory}/${project.build.finalName}.war</app>
-                    <name>${project.build.finalName}</name>
-                    <port>7070</port>
-                    <contextRoot>${project.artifactId}</contextRoot>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.glassfish.main.common</groupId>
-                        <artifactId>simple-glassfish-api</artifactId>
-                        <version>${glassfish.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.glassfish.main.extras</groupId>
-                        <artifactId>glassfish-embedded-all</artifactId>
-                        <version>${glassfish.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
         </plugins>
     </build>
 
@@ -220,9 +202,30 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-servlet</artifactId>
+            <version>${jersey-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+            <version>${jersey-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.ejb</artifactId>
+            <version>3.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>9.4.1212</version>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>${primefaces.version}</version>
         </dependency>
     </dependencies>
     <distributionManagement> 

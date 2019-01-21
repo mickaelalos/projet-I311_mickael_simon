@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/templates/mainTemplate.xhtml">
+
+    <ui:define name="bodyContent">
+        <h:form id="addAnimeForm">
+            <fieldset>
+                <legend>Titre</legend>
+                <p:inputText id="titleAnime"
+                             label="titre"
+                             value="#{animeBean.newTitle}"
+                             required="true"
+                             requiredMessage="Veuillez saisir un titre"
+                             size="40"
+                             maxlength="80">
+                    <f:validateLength minimum="4" maximum="50" />
+                    <f:ajax event="blur" render="newMessageError" />
+                <h:message id="newMessageErrorTitle" for="titleAnime"/>
+                </p:inputText>
+                <legend>Nombre d'épisode</legend>
+                <p:inputText id="episodeAnime"
+                             label="episode"
+                             value="#{animeBean.newEpisode}"
+                             required="true"
+                             requiredMessage="Veuillez saisir un nombre d'épisode"
+                             size="10"
+                             maxlength="20">
+                    <f:validateLength minimum="1" maximum="3" />
+                    <f:ajax event="blur" render="newMessageError" />
+                <h:message id="newMessageErrorEpisode" for="episodeAnime"/>
+                </p:inputText>
+            </fieldset>
+            <br/>
+            <br/>
+            <p:commandButton ajax="false" value="Ajouter Anime" action="#{animeBean.addAnime()}"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

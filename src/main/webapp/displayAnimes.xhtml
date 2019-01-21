@@ -1,0 +1,16 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/templates/mainTemplate.xhtml">
+
+    <ui:define name="bodyContent">
+        <p:dataList value="#{animeBean.findAll()}" var="anime" type="ordered">
+            <f:facet name="header">
+                Animes
+            </f:facet>
+            #{anime.title}, #{anime.episode}
+        </p:dataList>
+    </ui:define>
+</ui:composition>
