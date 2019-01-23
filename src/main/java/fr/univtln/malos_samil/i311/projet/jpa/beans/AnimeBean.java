@@ -3,6 +3,7 @@ package fr.univtln.malos_samil.i311.projet.jpa.beans;
 import fr.univtln.malos_samil.i311.projet.jpa.anime.Anime;
 import fr.univtln.malos_samil.i311.projet.jpa.anime.AnimeCrud;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,16 +15,13 @@ import java.util.List;
 public class AnimeBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    private List<Anime> animeList;
+
     @Inject
     AnimeCrud animeCrud;
 
     private String newTitle;
     private int newEpisode;
-
-    public List<Anime> findAll(){
-        List<Anime> animeList = animeCrud.getAll();
-        return animeList;
-    }
 
     public String addAnime(){
         Anime anime = new Anime(newTitle, newEpisode);
@@ -45,6 +43,11 @@ public class AnimeBean implements Serializable {
 
     public void setNewEpisode(int newEpisode) {
         this.newEpisode = newEpisode;
+    }
+
+    public List<Anime> getAnimeList(){
+        animeList = animeCrud.getAll();
+        return animeList;
     }
 }
 

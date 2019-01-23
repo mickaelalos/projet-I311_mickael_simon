@@ -5,12 +5,66 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 template="/templates/mainTemplate.xhtml">
 
+
     <ui:define name="bodyContent">
-        <p:dataList value="#{animeBean.findAll()}" var="anime" type="ordered">
-            <f:facet name="header">
-                Animes
-            </f:facet>
-            #{anime.title}, #{anime.episode}
-        </p:dataList>
+        <h:form id="form">
+            <p:dataGrid var="anime" value="#{animeBean.animeList}" columns="3" layout="grid"
+                        rows="12" paginator="true" id="cars"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="6,12,16">
+
+                <f:facet name="header">
+                    Cars for Sale
+                </f:facet>
+
+                <p:panel header="#{anime.title}" style="text-align:center">
+                    <h:panelGrid columns="1" style="width:100%">
+
+                        <h:outputText value="#{anime.episode}" />
+
+                        <p:commandLink update=":form:animeDetail" oncomplete="PF('animeDialog').show()" title="View Detail">
+                            <h:outputText styleClass="ui-icon-search" style="margin:0 auto;"/>
+                            <f:setPropertyActionListener value="#{anime}" target="#{displayAnimesBean.selectedAnime}" />
+                        </p:commandLink>
+                    </h:panelGrid>
+                </p:panel>
+
+            </p:dataGrid>
+
+            <p:dialog header="Anime Info" widgetVar="animeDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+                <p:outputPanel id="animeDetail" style="text-align:center;">
+                    <p:panelGrid  columns="2" rendered="#{not empty displayAnimesBean.selectedAnime}" columnClasses="label,value">
+
+                        <f:facet name="header">
+                            <p:graphicImage name="#{displayAnimesBean.selectedAnime.icon}"/>
+                        </f:facet>
+
+                        <h:outputText value="Id:" />
+                        <h:outputText value="#{displayAnimesBean.selectedAnime.id}" />
+
+                        <h:outputText value="Title" />
+                        <h:outputText value="#{displayAnimesBean.selectedAnime.title}" />
+
+                        <h:outputText value="Year:" />
+                        <h:outputText value="#{displayAnimesBean.selectedAnime.year}"/>
+
+                        <h:outputText value="Studio:" />
+                        <h:outputText value="#{displayAnimesBean.selectedAnime.studio}" />
+
+                        <h:outputText value="Episode:" />
+                        <h:outputText value="#{displayAnimesBean.selectedAnime.episode}" />
+
+                        <h:outputText value="Season:" />
+                        <h:outputText value="#{displayAnimesBean.selectedAnime.season}" />
+
+                        <h:outputText value="Status:" />
+                        <h:outputText value="#{displayAnimesBean.selectedAnime.status}" />
+
+                        <h:outputText value="Synopsis:" />
+                        <h:outputText value="#{displayAnimesBean.selectedAnime.synopsis}" />
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
     </ui:define>
 </ui:composition>
