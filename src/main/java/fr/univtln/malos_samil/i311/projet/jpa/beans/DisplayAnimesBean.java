@@ -1,18 +1,16 @@
 package fr.univtln.malos_samil.i311.projet.jpa.beans;
 
-
 import fr.univtln.malos_samil.i311.projet.jpa.anime.Anime;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
-
 @Named
-@Stateless
+@RequestScoped
 public class DisplayAnimesBean implements Serializable {
     private static final long serialVersionUID = 1L;
 

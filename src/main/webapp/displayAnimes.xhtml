@@ -8,39 +8,35 @@
 
     <ui:define name="bodyContent">
         <h:form id="form">
-            <p:dataGrid var="anime" value="#{animeBean.animeList}" columns="3" layout="grid"
-                        rows="12" paginator="true" id="cars"
-                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                        rowsPerPageTemplate="6,12,16">
+            <p:dataTable value="#{animeBean.animeList}" var="anime"
+                         paginator="true"
+                         paginatorTemplate=
+                                 "{FirstPageLink}
+         {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" lazy="true">
 
                 <f:facet name="header">
-                    Cars for Sale
+                    Mes animes
                 </f:facet>
 
-                <p:panel header="#{anime.title}" style="text-align:center">
-                    <h:panelGrid columns="1" style="width:100%">
+                <p:column headerText="Title" filterBy="#{anime.title}" filterMatchMode="contains" filterValue="#{anime.title}">
+                    <h:outputText value="#{anime.title}" />
+                </p:column>
 
-                        <h:outputText value="#{anime.episode}" />
-
-                        <p:commandLink update=":form:animeDetail" oncomplete="PF('animeDialog').show()" title="View Detail">
-                            <h:outputText styleClass="ui-icon-search" style="margin:0 auto;"/>
-                            <f:setPropertyActionListener value="#{anime}" target="#{displayAnimesBean.selectedAnime}" />
-                        </p:commandLink>
-                    </h:panelGrid>
-                </p:panel>
-
-            </p:dataGrid>
+                <p:column headerText="Anime detail">
+                    <p:commandLink update=":form:animeDetail" oncomplete="PF('animeDialog').show()" title="View Detail">
+                        <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;"/>
+                        <f:setPropertyActionListener value="#{anime}" target="#{displayAnimesBean.selectedAnime}" />
+                    </p:commandLink>
+                </p:column>
+            </p:dataTable>
 
             <p:dialog header="Anime Info" widgetVar="animeDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
-                <p:outputPanel id="animeDetail" style="text-align:center;">
+                <p:outputPanel id="animeDetail" style="text-align:center;" autoUpdate="true">
                     <p:panelGrid  columns="2" rendered="#{not empty displayAnimesBean.selectedAnime}" columnClasses="label,value">
 
                         <f:facet name="header">
                             <p:graphicImage name="#{displayAnimesBean.selectedAnime.icon}"/>
                         </f:facet>
-
-                        <h:outputText value="Id:" />
-                        <h:outputText value="#{displayAnimesBean.selectedAnime.id}" />
 
                         <h:outputText value="Title" />
                         <h:outputText value="#{displayAnimesBean.selectedAnime.title}" />
