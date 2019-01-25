@@ -14,30 +14,63 @@ import java.util.Objects;
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
         @NamedQuery(name = StringQueries.GET_ANIME_ALL,
-                query = "SELECT anime FROM Anime anime")})
+                query = "SELECT anime FROM Anime anime"),
+        @NamedQuery(name = StringQueries.GET_ANIME_CNT,
+                query = "SELECT count(anime) FROM Anime anime WHERE anime.title = :Ptitle")
+})
 public class Anime {
-    public enum Season {None,Winter,Summer,Spring,Fall}
-    public enum Status {None,Currently,Finished}
+    public enum Season {
+        None("n/a"),
+        Winter("Hiver"),
+        Summer("Été"),
+        Spring("Printemps"),
+        Fall("Automne");
 
-    @Id
+        private final String vf;
+
+        Season(String vf){
+            this.vf = vf;
+        }
+
+        public String toVf() {
+            return vf;
+        }
+    }
+    public enum Status {
+        None("n/a"),
+        Currently("En Cours"),
+        Finished("Terminé");
+
+        private final String vf;
+
+        Status(String vf){
+            this.vf = vf;
+        }
+
+        public String getVf() {
+            return vf;
+        }
+    }
+
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="ANIME_ID")
     private int id;
     @Id
     @XmlElement
-    @Column(name="TITLE")
+    @Column(name="TITLE", length = 50)
     private String title;
     @XmlElement
     @Column(name="YEAR")
     private int year;
     @XmlElement
-    @Column(name="SYNOPSIS")
+    @Lob
+    @Column(name="SYNOPSIS", length = 2000)
     private String synopsis;
     @XmlElement
-    @Column(name="ICON")
+    @Column(name="ICON", length = 100)
     private String icon;
     @XmlElement
-    @Column(name="STUDIO")
+    @Column(name="STUDIO", length = 50)
     private String studio;
     @XmlElement
     @Column(name="EPISODE")
@@ -52,17 +85,6 @@ public class Anime {
     private Status status;
 
     public Anime() {
-    }
-
-    public Anime(String title, int episode) {
-        this.title = title;
-        this.year = 2019;
-        this.synopsis = "n/a";
-        this.icon = "n/a";
-        this.studio = "n/a";
-        this.episode = episode;
-        this.season = Season.None;
-        this.status = Status.None;
     }
 
     public Anime(String title, int year, String synopsis, String icon, String studio, int episode, Season season, Status status) {
@@ -162,13 +184,12 @@ public class Anime {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Anime anime = (Anime) o;
-        return getId() == anime.getId() &&
-                getTitle().equals(anime.getTitle());
+        return getTitle().equals(anime.getTitle());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle());
+        return Objects.hash(getTitle());
     }
 
     @Override

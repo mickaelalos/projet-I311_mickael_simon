@@ -29,7 +29,10 @@ public class AnimeCrud {
     }
 
     public List<Anime> getAll(){
-        List<Anime> animeList = em.createNamedQuery(StringQueries.GET_ANIME_ALL).getResultList();
-        return animeList;
+        return (List<Anime>) em.createNamedQuery(StringQueries.GET_ANIME_ALL).getResultList();
+    }
+
+    public long countAnime(String title){
+        return (Long) em.createNamedQuery(StringQueries.GET_ANIME_CNT).setParameter("Ptitle",title).getSingleResult();
     }
 }
