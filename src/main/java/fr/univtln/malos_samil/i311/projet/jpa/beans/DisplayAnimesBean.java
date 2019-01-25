@@ -22,7 +22,7 @@ public class DisplayAnimesBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        animeList = animeBean.getAnimeList();
+        animeList = animeBean.findAll();
     }
 
     public List<Anime> getAnimeList(){

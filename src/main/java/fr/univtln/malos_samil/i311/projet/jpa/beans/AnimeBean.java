@@ -158,5 +158,9 @@ public class AnimeBean implements Serializable {
     public void setNewStudio(String newStudio) {
         this.newStudio = newStudio;
     }
+
+    public int getPageSize(){
+        return animeCrud.getPageSize();
+    }
 }
 

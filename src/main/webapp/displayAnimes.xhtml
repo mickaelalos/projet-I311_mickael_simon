@@ -8,8 +8,8 @@
 
     <ui:define name="bodyContent">
         <h:form id="form">
-            <p:dataTable value="#{animeBean.animeList}" var="anime"
-                         paginator="true"
+            <p:dataTable value="#{animeBean.findAll}" var="anime"
+                         paginator="true" rows="#{animeBean.pageSize}"
                          paginatorTemplate=
                                  "{FirstPageLink}
          {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" lazy="true">
