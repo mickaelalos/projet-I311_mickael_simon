@@ -28,8 +28,9 @@ public class AnimeCrud {
         em.merge(anime);
     }
 
-    public List<Anime> getAll(){
-        return (List<Anime>) em.createNamedQuery(StringQueries.GET_ANIME_ALL).getResultList();
+    public List<Anime> getAll(int start, int nb){
+        return (List<Anime>) em.createNamedQuery(StringQueries.GET_ANIME_ALL)
+                .setFirstResult(start*nb).setMaxResults((start+1)*nb).getResultList();
     }
 
     public long countAnime(String title){
