@@ -47,7 +47,7 @@ public class Anime {
             this.vf = vf;
         }
 
-        public String getVf() {
+        public String toVf() {
             return vf;
         }
     }

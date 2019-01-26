@@ -21,8 +21,6 @@ import java.util.*;
 public class AnimeBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private List<Anime> animeList;
-
     @Inject
     AnimeCrud animeCrud;
 
@@ -59,7 +57,7 @@ public class AnimeBean implements Serializable {
         Arrays.asList(Anime.Status.values())
                 .forEach(s -> {
                     if (s!=Anime.Status.None)
-                        statuss.put(s.getVf(),s);
+                        statuss.put(s.toVf(),s);
                 });
         newStatus = Anime.Status.None;
         newSynopsis = "";
@@ -90,10 +88,6 @@ public class AnimeBean implements Serializable {
         return statuss;
     }
 
-    public List<Anime> findAll(){
-        return animeCrud.getAll();
-    }
-
     public String addAnime() {
         Anime anime = new AnimeBuilder().setTitle(newTitle).setEpisode(newEpisode).setSeason(newSeason).setYear(newYear).setIcon(newUrlIcon).setStatus(newStatus).setStudio(newStudio).setSynopsis(newSynopsis).createAnime();
         animeCrud.addAnime(anime);
@@ -120,7 +114,6 @@ public class AnimeBean implements Serializable {
     public void setNewEpisode(int newEpisode) {
         this.newEpisode = newEpisode;
     }
-
 
     public String getNewUrlIcon() {
         return newUrlIcon;
@@ -158,9 +151,4 @@ public class AnimeBean implements Serializable {
     public void setNewStudio(String newStudio) {
         this.newStudio = newStudio;
     }
-
-    public int getPageSize(){
-        return animeCrud.getPageSize();
-    }
 }
-

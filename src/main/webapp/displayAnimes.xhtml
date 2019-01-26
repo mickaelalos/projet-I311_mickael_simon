@@ -5,62 +5,76 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 template="/templates/mainTemplate.xhtml">
 
-
     <ui:define name="bodyContent">
-        <h:form id="form">
-            <p:dataTable value="#{animeBean.findAll}" var="anime"
-                         paginator="true" rows="#{animeBean.pageSize}"
-                         paginatorTemplate=
-                                 "{FirstPageLink}
-         {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" lazy="true">
+        <h:form id="displayAnimeForm">
+            <p:dataView var="anime" value="#{displayAnimesBean.findAll()}" rows="12" paginator="true" rowsPerPageTemplate="6,12,16"
+                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        gridIcon="fa fa-th-large" listIcon="fa fa-bars">
 
-                <f:facet name="header">
-                    Mes animes
-                </f:facet>
+                <p:dataViewGridItem>
+                    <p:panel header="#{anime.title}" style="text-align:center">
+                        <h:panelGrid columns="1" style="width:100%">
+                            <p:graphicImage url="#{anime.icon}"/>
 
-                <p:column headerText="Title" filterBy="#{anime.title}" filterMatchMode="contains" filterValue="#{anime.title}">
-                    <h:outputText value="#{anime.title}" />
-                </p:column>
+                            <p:commandLink update=":displayAnimeForm:animeDetail" oncomplete="PF('animeDialog').show()" title="View Detail">
+                                <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
+                                <f:setPropertyActionListener value="#{anime}" target="#{displayAnimesBean.selectedAnime}" />
+                            </p:commandLink>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:dataViewGridItem>
 
-                <p:column headerText="Anime detail">
-                    <p:commandLink update=":form:animeDetail" oncomplete="PF('animeDialog').show()" title="View Detail">
-                        <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;"/>
-                        <f:setPropertyActionListener value="#{anime}" target="#{displayAnimesBean.selectedAnime}" />
-                    </p:commandLink>
-                </p:column>
-            </p:dataTable>
+                <p:dataViewListItem>
+                    <h:panelGrid columns="3" style="width:100%">
+                        <p:graphicImage url="#{anime.icon}" />
 
-            <p:dialog header="Anime Info" widgetVar="animeDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
-                <p:outputPanel id="animeDetail" style="text-align:center;" autoUpdate="true">
+                        <p:outputPanel>
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <br/>
+                                <h:outputText value="#{anime.title}" style="font-weight: bold"/>
+
+                                <h:outputText value="Nb Épisodes:" />
+                                <h:outputText value="#{anime.episode}" style="font-weight: bold"/>
+
+                                <h:outputText value="Year:" />
+                                <h:outputText value="#{anime.year}" style="font-weight: bold"/>
+                            </h:panelGrid>
+                        </p:outputPanel>
+
+                        <p:commandLink update=":displayAnimeForm:animeDetail" oncomplete="PF('animeDialog').show()" title="View Detail">
+                            <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
+                            <f:setPropertyActionListener value="#{anime}" target="#{displayAnimesBean.selectedAnime}" />
+                        </p:commandLink>
+                    </h:panelGrid>
+                </p:dataViewListItem>
+            </p:dataView>
+
+            <p:dialog header="Anime Info" widgetVar="animeDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="animeDetail" style="text-align:center;">
                     <p:panelGrid  columns="2" rendered="#{not empty displayAnimesBean.selectedAnime}" columnClasses="label,value">
-
                         <f:facet name="header">
-                            <p:graphicImage name="#{displayAnimesBean.selectedAnime.icon}"/>
+                            <p:graphicImage url="#{displayAnimesBean.selectedAnime.icon}"/>
                         </f:facet>
 
-                        <h:outputText value="Title" />
+                        <br/>
                         <h:outputText value="#{displayAnimesBean.selectedAnime.title}" />
 
-                        <h:outputText value="Year:" />
-                        <h:outputText value="#{displayAnimesBean.selectedAnime.year}"/>
+                        <h:outputText value="Year" />
+                        <h:outputText value="#{displayAnimesBean.selectedAnime.year}" />
 
-                        <h:outputText value="Studio:" />
-                        <h:outputText value="#{displayAnimesBean.selectedAnime.studio}" />
-
-                        <h:outputText value="Episode:" />
+                        <h:outputText value="Nb Épisodes:" />
                         <h:outputText value="#{displayAnimesBean.selectedAnime.episode}" />
 
-                        <h:outputText value="Season:" />
-                        <h:outputText value="#{displayAnimesBean.selectedAnime.season}" />
+                        <h:outputText value="Status" />
+                        <h:outputText value="#{displayAnimesBean.selectedAnime.status.toVf}" />
 
-                        <h:outputText value="Status:" />
-                        <h:outputText value="#{displayAnimesBean.selectedAnime.status}" />
+                        <h:outputText value="Season" />
+                        <h:outputText value="#{displayAnimesBean.selectedAnime.season.toVf}" />
 
-                        <h:outputText value="Synopsis:" />
-                        <h:outputText value="#{displayAnimesBean.selectedAnime.synopsis}" />
                     </p:panelGrid>
                 </p:outputPanel>
             </p:dialog>
         </h:form>
     </ui:define>
+
 </ui:composition>
