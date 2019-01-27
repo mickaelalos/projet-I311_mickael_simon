@@ -7,6 +7,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.util.List;
 
@@ -18,11 +20,14 @@ public class DisplayAnimesBean implements Serializable {
 
     private Anime selectedAnime;
     private int nbItems = 3;
-    private int startP = 0;
+    //private int page = 0;
     private boolean right, left = true;
     //private List<Anime> animeList;
-    private int nbPage = 1;
-
+    @Min(value = 1,message = "Le nombre de pages doit être supérieur à 0")
+    @Max(value = 9999,message = "Le nombre de pages doit être inferieur à 9999")
+    private int nbPage;
+    private int nbPageMax;
+    private String text = "";
 
     @Inject
     AnimeCrud animeCrud;
@@ -35,14 +40,14 @@ public class DisplayAnimesBean implements Serializable {
     public List<Anime> initVar(){
         List<Anime> animeList =  findAll();
 
-        //int tmp = (int)animeCrud.countAll();
-
+        int tmp = (int)animeCrud.countAll();
+        nbPageMax = tmp/nbItems;
 
         if(animeList.size() < nbItems){
             right = true;
         }
 
-        if(startP > 0){
+        if(nbPage > 1){
             left = false;
         }
 
@@ -50,7 +55,7 @@ public class DisplayAnimesBean implements Serializable {
             right = false;
         }
 
-        if(startP <= 0){
+        if(nbPage <= 1){
             left = true;
         }
 
@@ -59,7 +64,7 @@ public class DisplayAnimesBean implements Serializable {
     }
 
     public List<Anime> findAll() {
-        return animeCrud.getAll(startP,nbItems);
+        return animeCrud.getAll(nbPage,nbItems, text);
     }
 
     public Anime getSelectedAnime() {
@@ -79,14 +84,12 @@ public class DisplayAnimesBean implements Serializable {
     }
 
     public void onClickRight(){
-        startP = startP + 1;
-        nbPage++;
+        nbPage = nbPage + 1;
         initVar();
     }
 
     public void onClickLeft(){
-        startP = startP - 1;
-        nbPage--;
+        nbPage = nbPage - 1;
         initVar();
     }
 
@@ -106,15 +109,31 @@ public class DisplayAnimesBean implements Serializable {
         this.left = left;
     }
 
-    public int getStartP() {
-        return startP;
-    }
-
-    public void setStartP(int startP) {
-        this.startP = startP;
-    }
-
-    public int getNbPage() {
+    public int getNbPage(){
         return nbPage;
     }
+
+    public void setNbPage(int nbPage){
+        this.nbPage = nbPage;
+    }
+
+    public int getNbPageMax() {
+        return nbPageMax;
+    }
+
+    public void setNbPageMax(int nbPageMax) {
+        this.nbPageMax = nbPageMax;
+    }
+
+    public String getText() {
+        return text;
+    }
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void filterList(){
+        text = text.trim();
+    }
+
 }

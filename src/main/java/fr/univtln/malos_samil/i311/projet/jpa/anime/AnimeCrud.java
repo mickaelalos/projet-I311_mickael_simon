@@ -28,13 +28,13 @@ public class AnimeCrud {
         em.merge(anime);
     }
 
-    public List<Anime> getAll(int start, int nb){
-        return (List<Anime>) em.createNamedQuery(StringQueries.GET_ANIME_ALL)
-                .setFirstResult(start*nb).setMaxResults((start+1)*nb).getResultList();
+    public List<Anime> getAll(int page, int nb, String title){
+        return (List<Anime>) em.createNamedQuery(StringQueries.GET_ANIME_ALL_LIKE)
+                .setFirstResult((page-1)*nb).setMaxResults((page)*nb).setParameter("Ptitle", "%"+title+"%").getResultList();
     }
 
     public long countAnime(String title){
-        return (Long) em.createNamedQuery(StringQueries.GET_ANIME_CNT).setParameter("Ptitle",title).getSingleResult();
+        return (Long) em.createNamedQuery(StringQueries.GET_ANIME_CNT).setParameter("Ptitle", title).getSingleResult();
     }
 
     public long countAll(){
