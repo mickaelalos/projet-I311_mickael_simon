@@ -3,12 +3,9 @@ package fr.univtln.malos_samil.i311.projet.jpa.beans;
 import fr.univtln.malos_samil.i311.projet.jpa.anime.Anime;
 import fr.univtln.malos_samil.i311.projet.jpa.anime.AnimeCrud;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.util.List;
 
@@ -19,9 +16,7 @@ public class DisplayAnimesBean implements Serializable {
     private static final long serialVersionUID = 1L;
     private Anime selectedAnime;
     private int nbItems = 2;
-    //private int page = 0;
     private boolean right, left = true;
-    //private List<Anime> animeList;
     private int nbPage = 1;
     private int nbPageMax;
     private String text = "";
