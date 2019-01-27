@@ -16,8 +16,16 @@
                                      disabled="#{displayAnimesBean.left}"
                                      style="padding-right:10px"/>
 
-                    <p:outputPanel>
-                        <h:panelGrid columns="2" cellpadding="5">
+                    <p:outputPanel style="text-align:center; align-self:center;
+                                    align-content:center;
+                                    align-items:center;
+                                    alignment:center;
+                                    alignment-baseline:center;">
+                        <h:panelGrid columns="2" cellpadding="5" style="align-self:center;
+                                        align-content:center;
+                                        align-items:center;
+                                        alignment:center;
+                                        alignment-baseline:center;" >
                             <p:inputText id="nbPage"
                                          value="#{displayAnimesBean.nbPage}"
                                          style="font-weight: bold"
@@ -90,20 +98,20 @@
                 </p:dataViewListItem>
             </p:dataView>
 
-            <p:dialog style="width:25%" header="Anime Info" widgetVar="animeDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+            <p:dialog style="width: ;" header="Anime Info" widgetVar="animeDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="animeDetail" style="text-align:center;">
                     <p:panelGrid  columns="2" rendered="#{not empty displayAnimesBean.selectedAnime}" columnClasses="label,value">
                         <f:facet name="header">
                             <p:graphicImage url="#{displayAnimesBean.selectedAnime.icon}" width="105" height="150"/>
                         </f:facet>
 
-                        <br/>
+                        <h:outputText value="Titre" />
                         <h:outputText value="#{displayAnimesBean.selectedAnime.title}" />
 
                         <h:outputText value="Année" />
                         <h:outputText value="#{displayAnimesBean.selectedAnime.year}" />
 
-                        <h:outputText value="Nb Épisodes:" />
+                        <h:outputText value="Nb Épisodes" />
                         <h:outputText value="#{displayAnimesBean.selectedAnime.episode}" />
 
                         <h:outputText value="Status" />
@@ -114,6 +122,9 @@
 
                         <h:outputText value="Synopsis" />
                         <h:outputText value="#{displayAnimesBean.selectedAnime.synopsis}" />
+
+                        <h:outputText value="Studio" />
+                        <h:outputText value="#{displayAnimesBean.selectedAnime.studio}" />
 
                     </p:panelGrid>
                 </p:outputPanel>

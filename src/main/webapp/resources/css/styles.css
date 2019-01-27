@@ -2,7 +2,7 @@
 #wrapper{
    width:1000px;
    margin:0 auto;
-   text-align:left;
+   text-align:center;
 }
 
 .header {
@@ -35,6 +35,17 @@
 
 .ui-panel{
     align-self:center;
+    text-align:center;
+    align-content:center;
+    align-items:center;
+    alignment:center;
+    alignment-baseline:center;
 }
 
+h1{
+    alignment:center;
+}
 
+dialog{
+    alignment:center;
+}
