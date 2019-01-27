@@ -40,4 +40,8 @@ public class AnimeCrud {
     public long countAll(){
         return (Long) em.createNamedQuery(StringQueries.GET_ANIME_CNT_ALL).getSingleResult();
     }
+
+    public long countAllLike(String title){
+        return (Long) em.createNamedQuery(StringQueries.GET_ANIME_CNT_ALL_LIKE).setParameter("Ptitle", "%"+title+"%").getSingleResult();
+    }
 }

@@ -18,28 +18,20 @@ import java.util.List;
 public class DisplayAnimesBean implements Serializable {
     private static final long serialVersionUID = 1L;
     private Anime selectedAnime;
-    private int nbItems = 3;
+    private int nbItems = 2;
     //private int page = 0;
     private boolean right, left = true;
     //private List<Anime> animeList;
-    @Min(value = 1,message = "Le nombre de pages doit être supérieur à 0")
-    @Max(value = 9999,message = "Le nombre de pages doit être inferieur à 9999")
     private int nbPage = 1;
     private int nbPageMax;
     private String text = "";
+    private List<Anime> animes;
 
     @Inject
     AnimeCrud animeCrud;
 
-    @PostConstruct
-    public void init(){
-        initVar();
-    }
-
-    public List<Anime> initVar(){
-        List<Anime> animeList =  findAll();
-
-        long tmp = animeCrud.countAll();
+    public void initVar(){
+        double tmp = text.length()>0 ? (double)animeCrud.countAllLike(text) : (double)animeCrud.countAll();
 
         if(tmp == 0){
             nbPageMax = 1;
@@ -49,29 +41,17 @@ public class DisplayAnimesBean implements Serializable {
             nbPageMax = (int) Math.ceil(tmp/(double)nbItems);
         }
 
+        if(nbPage>nbPageMax) nbPage = nbPageMax;
 
-        if(animeList.size() < nbItems){
-            right = true;
-        }
+        right = nbPage >= nbPageMax;
 
-        if(nbPage > 1){
-            left = false;
-        }
+        left = nbPage <= 1;
 
-        if(animeList.size() >= nbItems){
-            right = false;
-        }
-
-        if(nbPage <= 1){
-            left = true;
-        }
-
-        return animeList;
-
+        animes =  findAll();
     }
 
     public List<Anime> findAll() {
-        return animeCrud.getAll(nbPage,nbItems, text);
+        return animeCrud.getAll(nbPage, nbItems, text);
     }
 
     public Anime getSelectedAnime() {
@@ -122,6 +102,11 @@ public class DisplayAnimesBean implements Serializable {
 
     public void setNbPage(int nbPage){
         this.nbPage = nbPage;
+        if(nbPage >= nbPageMax)
+            this.nbPage = nbPageMax;
+        else if(nbPage<=1)
+            this.nbPage = 1;
+        initVar();
     }
 
     public int getNbPageMax() {
@@ -136,11 +121,16 @@ public class DisplayAnimesBean implements Serializable {
         return text;
     }
     public void setText(String text) {
-        this.text = text;
+        this.text = text.trim();
+        initVar();
     }
 
-    public void filterList(){
-        text = text.trim();
+    public String getHeader(){
+        initVar();
+        return "Mes animes";
     }
 
+    public List<Anime> getAnimes(){
+        return animes;
+    }
 }

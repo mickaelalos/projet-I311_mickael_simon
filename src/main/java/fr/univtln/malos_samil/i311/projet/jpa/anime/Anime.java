@@ -13,14 +13,16 @@ import java.util.Objects;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
-        @NamedQuery(name = StringQueries.GET_ANIME_ALL,
-                query = "SELECT anime FROM Anime anime"),
         @NamedQuery(name = StringQueries.GET_ANIME_CNT,
                 query = "SELECT count(anime) FROM Anime anime WHERE anime.title = :Ptitle"),
+        @NamedQuery(name = StringQueries.GET_ANIME_ALL,
+                query = "SELECT anime FROM Anime anime"),
         @NamedQuery(name = StringQueries.GET_ANIME_CNT_ALL,
                 query = "SELECT count(anime) FROM Anime anime"),
         @NamedQuery(name = StringQueries.GET_ANIME_ALL_LIKE,
-                query = "SELECT anime FROM Anime anime WHERE anime.title LIKE :Ptitle")
+                query = "SELECT anime FROM Anime anime WHERE anime.title LIKE :Ptitle"),
+        @NamedQuery(name = StringQueries.GET_ANIME_CNT_ALL_LIKE,
+                query = "SELECT count(anime) FROM Anime anime WHERE anime.title LIKE :Ptitle")
 })
 public class Anime {
     public enum Season {

@@ -7,7 +7,7 @@
 
     <ui:define name="bodyContent">
         <h:form id="displayAnimeForm">
-            <p:panel header="Mes animes" style="text-align:center">
+            <p:panel header="#{displayAnimesBean.getHeader()}" style="text-align:center">
                 <p:panelGrid columns="3"  style="width:100%">
                     <p:commandButton id="btnLeft"
                                      icon="fa fa-fw fa-arrow-left"
@@ -18,16 +18,16 @@
 
                     <p:outputPanel>
                         <h:panelGrid columns="2" cellpadding="5">
-                            <h:inputText id="nbPage"
-                                    value="#{displayAnimesBean.nbPage}"
-                                    style="font-weight: bold"
-                                    required="true"
-                                    requiredMessage="Veuillez saisir un nombre de page"
-                                    converterMessage="Veuillez saisir un nombre de page"
-                                    size="5"
-                                    maxlength="9999">
-                                 <p:ajax event="blur" update="animes"/>
-                            </h:inputText>
+                            <p:inputText id="nbPage"
+                                         value="#{displayAnimesBean.nbPage}"
+                                         style="font-weight: bold"
+                                         required="true"
+                                         requiredMessage="Veuillez saisir un nombre de page"
+                                         converterMessage="Veuillez saisir un nombre de page"
+                                         size="2"
+                                         maxlength="4">
+                                <p:ajax event="blur" update="animes btnLeft btnRight nbPageMax nbPage"/>
+                            </p:inputText>
 
                             <h:outputText id="nbPageMax"
                                           value="#{displayAnimesBean.nbPageMax}"/>
@@ -45,11 +45,11 @@
 
             <p:panel>
                 <p:inputText id="filter" value="#{displayAnimesBean.text}" placeholder="Recherche anime par titre">
-                    <p:ajax event="keyup" update="animes" listener="#{displayAnimesBean.filterList()}" />
+                    <p:ajax event="keyup" update="animes btnLeft btnRight nbPageMax nbPage"/>
                 </p:inputText>
             </p:panel>
 
-            <p:dataView id="animes" var="anime" value="#{displayAnimesBean.initVar()}" rows="#{displayAnimesBean.nbItems}"
+            <p:dataView id="animes" var="anime" value="#{displayAnimesBean.animes}" rows="#{displayAnimesBean.nbItems}"
                         gridIcon="fa fa-fw fa-th" listIcon="fa fa-fw fa-bars">
 
                 <p:dataViewGridItem>
@@ -67,7 +67,7 @@
 
                 <p:dataViewListItem>
                     <h:panelGrid columns="3" style="width:100%">
-                        <p:graphicImage url="#{anime.icon}" />
+                        <p:graphicImage url="#{anime.icon}" width="85" height="120" />
 
                         <p:outputPanel>
                             <h:panelGrid columns="2" cellpadding="5">
@@ -94,7 +94,7 @@
                 <p:outputPanel id="animeDetail" style="text-align:center;">
                     <p:panelGrid  columns="2" rendered="#{not empty displayAnimesBean.selectedAnime}" columnClasses="label,value">
                         <f:facet name="header">
-                            <p:graphicImage url="#{displayAnimesBean.selectedAnime.icon}"/>
+                            <p:graphicImage url="#{displayAnimesBean.selectedAnime.icon}" width="105" height="150"/>
                         </f:facet>
 
                         <br/>
@@ -111,6 +111,9 @@
 
                         <h:outputText value="Saison" />
                         <h:outputText value="#{displayAnimesBean.selectedAnime.season.toVf()}" />
+
+                        <h:outputText value="Synopsis" />
+                        <h:outputText value="#{displayAnimesBean.selectedAnime.synopsis}" />
 
                     </p:panelGrid>
                 </p:outputPanel>

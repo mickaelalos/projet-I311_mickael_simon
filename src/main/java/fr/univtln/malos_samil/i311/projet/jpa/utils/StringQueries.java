@@ -8,4 +8,5 @@ public class StringQueries {
     public static final String GET_ANIME_CNT = "getAnimeCnt";
     public static final String GET_ANIME_CNT_ALL = "getAnimeCntAll";
     public static final String GET_ANIME_ALL_LIKE = "getAnimeAllLike";
+    public static final String GET_ANIME_CNT_ALL_LIKE = "getAnimeCntAllLike";
 }
