@@ -8,93 +8,93 @@
     <ui:define name="bodyContent">
         <h:form id="addAnimeForm">
             <p:growl id="msgs" showDetail="true" />
-            <p:panel header="Création d'un Anime" style="margin-bottom:10px;">
-                <h:panelGrid columns="2" cellpadding="5">
-                    <h:panelGrid id="parent_" columns="2" cellpadding="5">
-                        <p:outputLabel for="titleAnime" value="Titre: " />
-                        <p:inputText id="titleAnime"
-                                     label="titre"
-                                     value="#{animeBean.newTitle}"
-                                     required="true"
-                                     requiredMessage="Veuillez saisir un titre"
-                                     converterMessage="Veuillez saisir un titre"
-                                     validatorMessage="Le titre doit faire entre 4 et 50 caractères"
-                                     size="40"
-                                     maxlength="80">
-                            <f:validateLength minimum="4" maximum="50" />
-                            <p:ajax event="blur" update="msgs"/>
-                        </p:inputText>
-                        <p:outputLabel for="urlIconAnime" value="Url de l'Icon: " />
-                        <p:inputText id="urlIconAnime"
-                                     label="urlIcon"
-                                     value="#{animeBean.newUrlIcon}"
-                                     required="true"
-                                     requiredMessage="Veuillez saisir un url"
-                                     size="50"
-                                     maxlength="100">
-                            <p:ajax event="blur" update="gico"/>
-                            <p:ajax event="blur" update="msgs"/>
-                        </p:inputText>
-                        <p:outputLabel for="episodeAnime" value="Nombre d'épisode: " />
-                        <p:inputText id="episodeAnime"
-                                     label="episode"
-                                     value="#{animeBean.newEpisode}"
-                                     required="true"
-                                     requiredMessage="Veuillez saisir un nombre d'épisode"
-                                     converterMessage="Veuillez saisir un nombre d'épisode"
-                                     size="5"
-                                     maxlength="20">
-                            <p:ajax event="blur" update="msgs"/>
-                        </p:inputText>
-                        <p:outputLabel for="seasonAnime" value="Saison: " />
-                        <p:selectOneMenu id="seasonAnime" value="#{animeBean.newSeason}" required="true" style="width:170px"
-                                         requiredMessage="Veuillez sélectionner une Saison"
-                                         converterMessage="Veuillez sélectionner une Saison"
-                                         validatorMessage="Veuillez sélectionner une Saison">
-                            <f:selectItem itemLabel="Sélectionner une Saison" itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="#{animeBean.seasons}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel for="yearAnime" value="Année: " />
-                        <p:inputText id="yearAnime"
-                                     label="annee"
-                                     value="#{animeBean.newYear}"
-                                     required="true"
-                                     requiredMessage="Veuillez saisir une année"
-                                     converterMessage="Veuillez saisir une année"
-                                     size="10"
-                                     maxlength="20">
-                            <p:ajax event="blur" update="msgs"/>
-                        </p:inputText>
-                        <p:outputLabel for="statusAnime" value="Status: " />
-                        <p:selectOneMenu id="statusAnime" value="#{animeBean.newStatus}" required="true" style="width:170px"
-                                         requiredMessage="Veuillez sélectionner un Status"
-                                         converterMessage="Veuillez sélectionner un Status"
-                                         validatorMessage="Veuillez sélectionner un Status">
-                            <f:selectItem itemLabel="Sélectionner un Status" itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="#{animeBean.statuss}" />
-                        </p:selectOneMenu>
-                        <p:outputLabel for="synopsysAnime" value="Synopsis: " />
-                        <p:inputTextarea id="synopsysAnime" rows="5" cols="30" value="#{animeBean.newSynopsis}" counter="display" maxlength="2000" counterTemplate="{0} caratères restants." autoResize="false" />
-                        <br/>
-                        <h:outputText id="display" />
-                        <p:outputLabel for="studioAnime" value="Studio: " />
-                        <p:inputText id="studioAnime"
-                                     label="studio"
-                                     value="#{animeBean.newStudio}"
-                                     converterMessage="Veuillez saisir un studio d'animation"
-                                     validatorMessage="Le studio d'animation doit faire moins de 50 caractères"
-                                     size="30"
-                                     maxlength="80">
-                            <f:validateLength maximum="50" />
-                        </p:inputText>
-                    </h:panelGrid>
-                    <h:panelGrid columns="1" cellpadding="5">
-                        <p:outputLabel for="gico" value="Prévisualisation de l'icon: " />
-                        <p:graphicImage id="gico" url="#{animeBean.getUrl()}" width="142" height="200"/>
-                    </h:panelGrid>
+            <p:panel header="#{animeBean.getHeader()}" style="text-align:center"/>
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:panelGrid columns="2" cellpadding="5" style="text-align:left">
+                    <p:outputLabel for="titleAnime" value="Titre: " />
+                    <p:inputText id="titleAnime"
+                                 label="titre"
+                                 value="#{animeBean.newTitle}"
+                                 required="true"
+                                 requiredMessage="Veuillez saisir un titre"
+                                 converterMessage="Veuillez saisir un titre"
+                                 validatorMessage="Le titre doit faire entre 4 et 50 caractères"
+                                 size="40"
+                                 maxlength="80">
+                        <f:validateLength minimum="4" maximum="50" />
+                        <p:ajax event="blur" update="msgs titleAnime"/>
+                    </p:inputText>
+                    <p:outputLabel for="urlIconAnime" value="Url de l'Icon: " />
+                    <p:inputText id="urlIconAnime"
+                                 label="urlIcon"
+                                 value="#{animeBean.newUrlIcon}"
+                                 required="true"
+                                 requiredMessage="Veuillez saisir un url"
+                                 size="50"
+                                 maxlength="100">
+                        <p:ajax event="blur" update="msgs urlIconAnime gico titleAnime"/>
+                    </p:inputText>
+                    <p:outputLabel for="episodeAnime" value="Nombre d'épisode: " />
+                    <p:inputText id="episodeAnime"
+                                 label="episode"
+                                 value="#{animeBean.newEpisode}"
+                                 required="true"
+                                 requiredMessage="Veuillez saisir un nombre d'épisode"
+                                 converterMessage="Veuillez saisir un nombre d'épisode"
+                                 size="5"
+                                 maxlength="20">
+                        <p:ajax event="blur" update="msgs"/>
+                    </p:inputText>
+                    <p:outputLabel for="seasonAnime" value="Saison: " />
+                    <p:selectOneMenu id="seasonAnime" value="#{animeBean.newSeason}" required="true" style="width:170px"
+                                     requiredMessage="Veuillez sélectionner une Saison"
+                                     converterMessage="Veuillez sélectionner une Saison"
+                                     validatorMessage="Veuillez sélectionner une Saison">
+                        <f:selectItem itemLabel="Sélectionner une Saison" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{animeBean.seasons}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel for="yearAnime" value="Année: " />
+                    <p:inputText id="yearAnime"
+                                 label="annee"
+                                 value="#{animeBean.newYear}"
+                                 required="true"
+                                 requiredMessage="Veuillez saisir une année"
+                                 converterMessage="Veuillez saisir une année"
+                                 size="10"
+                                 maxlength="20">
+                        <p:ajax event="blur" update="msgs"/>
+                    </p:inputText>
+                    <p:outputLabel for="statusAnime" value="Status: " />
+                    <p:selectOneMenu id="statusAnime" value="#{animeBean.newStatus}" required="true" style="width:170px"
+                                     requiredMessage="Veuillez sélectionner un Status"
+                                     converterMessage="Veuillez sélectionner un Status"
+                                     validatorMessage="Veuillez sélectionner un Status">
+                        <f:selectItem itemLabel="Sélectionner un Status" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{animeBean.statuss}" />
+                    </p:selectOneMenu>
+                    <p:outputLabel for="synopsysAnime" value="Synopsis: " />
+                    <p:inputTextarea id="synopsysAnime" rows="5" cols="30" value="#{animeBean.newSynopsis}" counter="display" maxlength="2000" counterTemplate="{0} caratères restants." autoResize="false" />
+                    <br/>
+                    <h:outputText id="display" />
+                    <p:outputLabel for="studioAnime" value="Studio: " />
+                    <p:inputText id="studioAnime"
+                                 label="studio"
+                                 value="#{animeBean.newStudio}"
+                                 converterMessage="Veuillez saisir un studio d'animation"
+                                 validatorMessage="Le studio d'animation doit faire moins de 50 caractères"
+                                 size="30"
+                                 maxlength="80">
+                        <f:validateLength maximum="50" />
+                    </p:inputText>
                 </h:panelGrid>
-                <p:commandButton update="msgs" value="Ajouter Anime" action="#{animeBean.addAnime()}"/>
-            </p:panel>
+                <h:panelGrid columns="1" cellpadding="5">
+                    <p:outputLabel for="gico" value="Prévisualisation de l'icon: " />
+                    <p:graphicImage id="gico" url="#{animeBean.getUrl()}" width="142" height="200"/>
+                </h:panelGrid>
+            </h:panelGrid>
+            <div style="text-align:center;width:100%">
+                <p:commandButton update="msgs titleAnime urlIconAnime" value="Ajouter Anime" action="#{animeBean.addAnime()}"/>
+            </div>
         </h:form>
     </ui:define>
 
