@@ -17,7 +17,6 @@ import java.util.List;
 @Stateless
 public class DisplayAnimesBean implements Serializable {
     private static final long serialVersionUID = 1L;
-
     private Anime selectedAnime;
     private int nbItems = 3;
     //private int page = 0;
@@ -25,7 +24,7 @@ public class DisplayAnimesBean implements Serializable {
     //private List<Anime> animeList;
     @Min(value = 1,message = "Le nombre de pages doit être supérieur à 0")
     @Max(value = 9999,message = "Le nombre de pages doit être inferieur à 9999")
-    private int nbPage;
+    private int nbPage = 1;
     private int nbPageMax;
     private String text = "";
 
@@ -40,8 +39,16 @@ public class DisplayAnimesBean implements Serializable {
     public List<Anime> initVar(){
         List<Anime> animeList =  findAll();
 
-        int tmp = (int)animeCrud.countAll();
-        nbPageMax = tmp/nbItems;
+        long tmp = animeCrud.countAll();
+
+        if(tmp == 0){
+            nbPageMax = 1;
+        }
+
+        if(tmp > 0){
+            nbPageMax = (int) Math.ceil(tmp/(double)nbItems);
+        }
+
 
         if(animeList.size() < nbItems){
             right = true;
