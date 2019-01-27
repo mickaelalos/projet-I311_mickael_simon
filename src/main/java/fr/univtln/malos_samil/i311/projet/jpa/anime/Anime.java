@@ -16,7 +16,9 @@ import java.util.Objects;
         @NamedQuery(name = StringQueries.GET_ANIME_ALL,
                 query = "SELECT anime FROM Anime anime"),
         @NamedQuery(name = StringQueries.GET_ANIME_CNT,
-                query = "SELECT count(anime) FROM Anime anime WHERE anime.title = :Ptitle")
+                query = "SELECT count(anime) FROM Anime anime WHERE anime.title = :Ptitle"),
+        @NamedQuery(name = StringQueries.GET_ANIME_CNT_ALL,
+                query = "SELECT count(anime) FROM Anime anime")
 })
 public class Anime {
     public enum Season {

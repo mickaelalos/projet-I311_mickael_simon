@@ -36,4 +36,8 @@ public class AnimeCrud {
     public long countAnime(String title){
         return (Long) em.createNamedQuery(StringQueries.GET_ANIME_CNT).setParameter("Ptitle",title).getSingleResult();
     }
+
+    public long countAll(){
+        return (Long) em.createNamedQuery(StringQueries.GET_ANIME_CNT_ALL).getSingleResult();
+    }
 }

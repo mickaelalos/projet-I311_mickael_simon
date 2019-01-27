@@ -7,24 +7,36 @@
 
     <ui:define name="bodyContent">
         <h:form id="displayAnimeForm">
-            <p:panelGrid columns="2" header="Mes animes" style="text-align:center">
-                <p:commandButton value="Previous Page"
-                                 styleClass="ui-icon-arrow-1-w"
-                                 action="#{displayAnimesBean.onClickLeft}"
-                                 update="animes" disabled="#{displayAnimesBean.left}" style="padding-right:10px"/>    <p:commandButton value="Next Page"
-                                                                       styleClass="ui-icon ui-icon-arrow-1-e"
-                                                                       action="#{displayAnimesBean.onClickRight}"
-                                                                       update="animes" disabled="#{displayAnimesBean.right}" style="padding-left:10px"/>
+            <p:panel header="Mes animes" style="text-align:center">
+                <p:panelGrid columns="3"  style="width:100%">
+                    <p:commandButton id="btnLeft"
+                                     icon="fa fa-fw fa-arrow-left"
+                                     action="#{displayAnimesBean.onClickLeft}"
+                                     update="animes btnLeft btnRight nbPage"
+                                     disabled="#{displayAnimesBean.left}"
+                                     style="padding-right:10px"/>
 
-            </p:panelGrid>
+                    <h:outputText id="nbPage" value="#{displayAnimesBean.nbPage}" style="font-weight: bold"/>
+
+                    <p:commandButton id="btnRight"
+                                     icon="fa fa-fw fa-arrow-right"
+                                     action="#{displayAnimesBean.onClickRight}"
+                                     update="animes btnLeft btnRight nbPage"
+                                     disabled="#{displayAnimesBean.right}"
+                                     style="padding-left:10px"/>
+
+                </p:panelGrid>
+            </p:panel>
+
+
 
             <p:dataView id="animes" var="anime" value="#{displayAnimesBean.initVar()}" rows="#{displayAnimesBean.nbItems}"
-                        gridIcon="fa fa-th-large" listIcon="fa fa-bars">
+                        gridIcon="fa fa-fw fa-th" listIcon="fa fa-fw fa-bars" widgetVar="animeWidget">
 
                 <p:dataViewGridItem>
                     <p:panel header="#{anime.title}" style="text-align:center">
                         <h:panelGrid columns="1" style="width:100%">
-                            <p:graphicImage url="#{anime.icon}" style="size:50px"/>
+                            <p:graphicImage url="#{anime.icon}" width="85" height="120"/>
 
                             <p:commandLink update=":displayAnimeForm:animeDetail" oncomplete="PF('animeDialog').show()" title="View Detail">
                                 <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
@@ -59,7 +71,7 @@
                 </p:dataViewListItem>
             </p:dataView>
 
-            <p:dialog header="Anime Info" widgetVar="animeDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+            <p:dialog style="width:25%" header="Anime Info" widgetVar="animeDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="animeDetail" style="text-align:center;">
                     <p:panelGrid  columns="2" rendered="#{not empty displayAnimesBean.selectedAnime}" columnClasses="label,value">
                         <f:facet name="header">
@@ -69,7 +81,7 @@
                         <br/>
                         <h:outputText value="#{displayAnimesBean.selectedAnime.title}" />
 
-                        <h:outputText value="Year" />
+                        <h:outputText value="Année" />
                         <h:outputText value="#{displayAnimesBean.selectedAnime.year}" />
 
                         <h:outputText value="Nb Épisodes:" />
@@ -78,7 +90,7 @@
                         <h:outputText value="Status" />
                         <h:outputText value="#{displayAnimesBean.selectedAnime.status.toVf()}" />
 
-                        <h:outputText value="Season" />
+                        <h:outputText value="Saison" />
                         <h:outputText value="#{displayAnimesBean.selectedAnime.season.toVf()}" />
 
                     </p:panelGrid>

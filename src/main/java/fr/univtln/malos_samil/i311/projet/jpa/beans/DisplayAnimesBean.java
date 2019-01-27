@@ -17,10 +17,11 @@ public class DisplayAnimesBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Anime selectedAnime;
-    private int nbItems = 2;
+    private int nbItems = 3;
     private int startP = 0;
     private boolean right, left = true;
     //private List<Anime> animeList;
+    private int nbPage = 1;
 
 
     @Inject
@@ -33,6 +34,9 @@ public class DisplayAnimesBean implements Serializable {
 
     public List<Anime> initVar(){
         List<Anime> animeList =  findAll();
+
+        //int tmp = (int)animeCrud.countAll();
+
 
         if(animeList.size() < nbItems){
             right = true;
@@ -76,11 +80,13 @@ public class DisplayAnimesBean implements Serializable {
 
     public void onClickRight(){
         startP = startP + 1;
+        nbPage++;
         initVar();
     }
 
     public void onClickLeft(){
         startP = startP - 1;
+        nbPage--;
         initVar();
     }
 
@@ -108,4 +114,7 @@ public class DisplayAnimesBean implements Serializable {
         this.startP = startP;
     }
 
+    public int getNbPage() {
+        return nbPage;
+    }
 }

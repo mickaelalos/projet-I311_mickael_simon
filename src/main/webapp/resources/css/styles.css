@@ -33,4 +33,8 @@
     border-bottom-color: var(--input-border-color, #A8A8A8);
 }
 
+.ui-panel{
+    align-self:center;
+}
+
 
