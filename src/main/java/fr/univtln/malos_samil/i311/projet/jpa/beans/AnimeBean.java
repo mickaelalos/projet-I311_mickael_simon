@@ -57,7 +57,7 @@ public class AnimeBean implements Serializable {
         Arrays.asList(Anime.Status.values())
                 .forEach(s -> {
                     if (s!=Anime.Status.None)
-                        statuss.put(s.getVf(),s);
+                        statuss.put(s.toVf(),s);
                 });
         newStatus = Anime.Status.None;
         newSynopsis = "";
@@ -86,10 +86,6 @@ public class AnimeBean implements Serializable {
 
     public Map<String, Anime.Status> getStatuss() {
         return statuss;
-    }
-
-    public List<Anime> findAll(){
-        return animeCrud.getAll();
     }
 
     public String addAnime() {
@@ -156,4 +152,3 @@ public class AnimeBean implements Serializable {
         this.newStudio = newStudio;
     }
 }
-

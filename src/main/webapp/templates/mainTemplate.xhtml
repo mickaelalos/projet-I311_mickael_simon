@@ -13,7 +13,7 @@
             <meta http-equiv="expires" content="0"/>
         </f:facet>
         <h:outputStylesheet library="css" name="styles.css"/>
-        <title>#{msg['app.title']}</title>
+        <title style="text-align:center">#{msg['app.title']}</title>
         <ui:insert name="head"/>
     </h:head>
     <h:body>
@@ -28,7 +28,7 @@
 
                 <h:form>
                     <p:toolbar>
-                        <p:toolbarGroup align="left">
+                        <p:toolbarGroup align="center">
                         <p:commandButton ajax="false" value="Acceuil" icon="ui-icon-home"
                                              action="welcome.jsf?faces-redirect=true"/>
                             <p:commandButton ajax="false" value="Animes"
