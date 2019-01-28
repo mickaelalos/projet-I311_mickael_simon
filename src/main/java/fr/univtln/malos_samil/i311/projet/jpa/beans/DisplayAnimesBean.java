@@ -15,7 +15,7 @@ import java.util.List;
 public class DisplayAnimesBean implements Serializable {
     private static final long serialVersionUID = 1L;
     private Anime selectedAnime;
-    private int nbItems = 2;
+    private int nbItems = 3;
     private boolean right, left = true;
     private int nbPage = 1;
     private int nbPageMax;

@@ -25,18 +25,18 @@ public class AnimeResource {
         return "Hi there!";
     }
 
-    @GET
+    /*@GET
     @Path("/animes/{id}")
     @Produces("application/json")
-    public Anime getAnime(@PathParam("id") final String id){
+    public Anime getAnime(@PathParam("id") final int id){
         return animeCrud.getAnime(id);
-    }
+    }*/
 
     @GET
-    @Path("/animes")
+    @Path("/animes/{page}")
     @Produces("application/json")
-    public List<Anime> getAll(){
-        return animeCrud.getAll(1,3,"Boku");
+    public List<Anime> getAll(@PathParam("page") final int page){
+        return animeCrud.getAll(page,3,"");
     }
 
     @POST
