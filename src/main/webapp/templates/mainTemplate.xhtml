@@ -13,7 +13,7 @@
             <meta http-equiv="expires" content="0"/>
         </f:facet>
         <h:outputStylesheet library="css" name="styles.css"/>
-        <title style="text-align:center">#{msg['app.title']}</title>
+        <title>#{msg['app.title']}</title>
         <ui:insert name="head"/>
     </h:head>
     <h:body>
@@ -21,13 +21,21 @@
 
             <div class="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all"
                  style="height: 80px; margin-bottom: 2px;">
-                <h1>#{msg['app.title']}</h1>
+                <h1 style="text-align:center; align-self:center;
+                align-content:center;
+                align-items:center;
+                alignment:center;
+                alignment-baseline:center;">#{msg['app.title']}</h1>
             </div>
             <div class="ui-panel ui-widget ui-widget-content ui-corner-all"
                  style="margin-bottom: 3px; min-height: 500px;">
 
                 <h:form>
-                    <p:toolbar>
+                    <p:toolbar style="text-align:center; align-self:center;
+                align-content:center;
+                align-items:center;
+                alignment:center;
+                alignment-baseline:center;">
                         <p:toolbarGroup align="center">
                         <p:commandButton ajax="false" value="Acceuil" icon="ui-icon-home"
                                              action="welcome.jsf?faces-redirect=true"/>

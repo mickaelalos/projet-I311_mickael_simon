@@ -16,16 +16,16 @@
                                      disabled="#{displayAnimesBean.left}"
                                      style="padding-right:10px"/>
 
-                    <p:outputPanel style="text-align:center; align-self:center;
+                    <p:panel style="text-align:center; align-self:center;
                                     align-content:center;
                                     align-items:center;
                                     alignment:center;
-                                    alignment-baseline:center;">
+                                    alignment-baseline:center; width:100%;" >
                         <h:panelGrid columns="2" cellpadding="5" style="align-self:center;
                                         align-content:center;
                                         align-items:center;
                                         alignment:center;
-                                        alignment-baseline:center;" >
+                                        alignment-baseline:center; width:100px;" >
                             <p:inputText id="nbPage"
                                          value="#{displayAnimesBean.nbPage}"
                                          style="font-weight: bold"
@@ -40,7 +40,7 @@
                             <h:outputText id="nbPageMax"
                                           value="#{displayAnimesBean.nbPageMax}"/>
                         </h:panelGrid>
-                    </p:outputPanel>
+                    </p:panel>
 
                     <p:commandButton id="btnRight"
                                      icon="fa fa-fw fa-arrow-right"
@@ -51,7 +51,11 @@
                 </p:panelGrid>
             </p:panel>
 
-            <p:panel>
+            <p:panel style="text-align:center; align-self:center;
+                align-content:center;
+                align-items:center;
+                alignment:center;
+                alignment-baseline:center;">
                 <p:inputText id="filter" value="#{displayAnimesBean.text}" placeholder="Recherche anime par titre">
                     <p:ajax event="keyup" update="animes btnLeft btnRight nbPageMax nbPage"/>
                 </p:inputText>
