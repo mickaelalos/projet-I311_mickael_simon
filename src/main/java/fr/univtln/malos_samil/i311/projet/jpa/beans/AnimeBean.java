@@ -3,6 +3,7 @@ package fr.univtln.malos_samil.i311.projet.jpa.beans;
 import fr.univtln.malos_samil.i311.projet.jpa.anime.Anime;
 import fr.univtln.malos_samil.i311.projet.jpa.anime.AnimeBuilder;
 import fr.univtln.malos_samil.i311.projet.jpa.anime.AnimeCrud;
+import fr.univtln.malos_samil.i311.projet.jpa.utils.URLValidator;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -12,9 +13,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Pattern;
 import java.io.Serializable;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 @Stateless
 @Named
@@ -25,7 +28,8 @@ public class AnimeBean implements Serializable {
     AnimeCrud animeCrud;
 
     private String newTitle;
-    @Pattern(regexp = "^https://cdn\\.myanimelist\\.net/images/.*\\.jpg$", message = "URL non valide. Veuillez prendre un image sur myanimelist.net")
+    @Inject
+    private URLValidator urlValidator;
     private String newUrlIcon;
     @Min(value = 1,message = "Le nombre d'épisode doit être supérieur à 1")
     @Max(value = 9999,message = "Le nombre d'épisode doit être inferieur à 9999")
@@ -42,23 +46,26 @@ public class AnimeBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        newTitle = "";
-        newEpisode = 0;
-        newUrlIcon = "";
-        newYear = Calendar.getInstance().get(Calendar.YEAR);
         seasons = new HashMap<>();
         Arrays.asList(Anime.Season.values())
                 .forEach(s -> {
                     if (s!=Anime.Season.None)
                         seasons.put(s.toVf(),s);
                 });
-        newSeason = Anime.Season.None;
         statuss = new HashMap<>();
         Arrays.asList(Anime.Status.values())
                 .forEach(s -> {
                     if (s!=Anime.Status.None)
                         statuss.put(s.toVf(),s);
                 });
+    }
+
+    public void resetVar(){
+        newTitle = "";
+        newEpisode = 0;
+        newUrlIcon = "";
+        newYear = Calendar.getInstance().get(Calendar.YEAR);
+        newSeason = Anime.Season.None;
         newStatus = Anime.Status.None;
         newSynopsis = "";
         newStudio = "";
@@ -91,7 +98,7 @@ public class AnimeBean implements Serializable {
     public String addAnime() {
         Anime anime = new AnimeBuilder().setTitle(newTitle).setEpisode(newEpisode).setSeason(newSeason).setYear(newYear).setIcon(newUrlIcon).setStatus(newStatus).setStudio(newStudio).setSynopsis(newSynopsis).createAnime();
         animeCrud.addAnime(anime);
-        init();
+        resetVar();
         return "displayAnimes";
     }
 
@@ -101,7 +108,7 @@ public class AnimeBean implements Serializable {
 
     public void setNewTitle(String newTitle) {
         if(animeCrud.countAnime(newTitle)>0) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "Anime déjà existant");
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Titre incorrect", "Anime déjà existant");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         } else
             this.newTitle = newTitle;
@@ -120,7 +127,13 @@ public class AnimeBean implements Serializable {
     }
 
     public void setNewUrlIcon(String newUrlIcon) {
-        this.newUrlIcon = newUrlIcon;
+        if (urlValidator.validateURL(newUrlIcon)){
+            this.newUrlIcon = newUrlIcon;
+        } else {
+            this.newUrlIcon = "";
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "URL non valide.", "Veuillez prendre un image sur myanimelist.net");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
     }
 
     public String getUrl() {
@@ -150,5 +163,10 @@ public class AnimeBean implements Serializable {
 
     public void setNewStudio(String newStudio) {
         this.newStudio = newStudio;
+    }
+
+    public String getHeader() {
+        resetVar();
+        return "Création d'un Anime";
     }
 }
