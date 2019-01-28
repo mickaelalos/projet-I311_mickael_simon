@@ -2,7 +2,7 @@
 #wrapper{
    width:1000px;
    margin:0 auto;
-   text-align:center;
+   text-align:left;
 }
 
 .header {
@@ -11,6 +11,11 @@
     border:1px solid #CCC;
     width:1000px;
     margin:5px auto;
+    text-align:center; align-self:center;
+    align-content:center;
+    align-items:center;
+    alignment:center;
+    alignment-baseline:center;
 }
 
 .mytable td {
@@ -33,19 +38,8 @@
     border-bottom-color: var(--input-border-color, #A8A8A8);
 }
 
-.ui-panel{
-    align-self:center;
-    text-align:center;
-    align-content:center;
-    align-items:center;
-    alignment:center;
-    alignment-baseline:center;
-}
-
-h1{
-    alignment:center;
-}
 
 dialog{
     alignment:center;
 }
+

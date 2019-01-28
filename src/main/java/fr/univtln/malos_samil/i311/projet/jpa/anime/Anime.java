@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
@@ -24,7 +25,7 @@ import java.util.Objects;
         @NamedQuery(name = StringQueries.GET_ANIME_CNT_ALL_LIKE,
                 query = "SELECT count(anime) FROM Anime anime WHERE anime.title LIKE :Ptitle")
 })
-public class Anime {
+public class Anime implements Serializable {
     public enum Season {
         None("n/a"),
         Winter("Hiver"),
